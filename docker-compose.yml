@@ -3,25 +3,23 @@ version: '3'
 services:
   jira:
     image: blacklabelops/jira:6.4.7
-#    extra_hosts:
-#      - "mysql:${MYSQL_HOST}"
     container_name: jira
     volumes:
       - jiradata:/var/atlassian/jira
     ports:
       - '8080:8080'
     environment:
-      - 'JIRA_DATABASE_URL=mysql://jira@aladdin_db_1/jiradb'
+      - 'JIRA_DATABASE_URL=mysql://jira@mysql/jiradb'
       - 'JIRA_DB_PASSWORD=jira'
       - 'CATALINA_OPTS= -Xms256m -Xmx1g'
     labels:
       com.blacklabelops.description: "Atlassian Jira"
       com.blacklabelops.service: "jira"
     networks:
-		  - default
-			- aladdin_default
+      - default
+      - aladdin_default
     external_links:
-      - aladdin_db_1
+      - mysql
 
 volumes:
   jiradata:
@@ -29,4 +27,4 @@ volumes:
 
 networks:
   aladdin_default:
-	  external: true
+    external: true
