@@ -2,7 +2,8 @@ version: '3'
 
 services:
   jira:
-    image: blacklabelops/jira:6.4.7
+    build: ./jira-5.0.4
+    image: jira:5.0.4
     container_name: jira
     volumes:
       - jiradata:/var/atlassian/jira
